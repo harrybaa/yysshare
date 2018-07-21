@@ -7,14 +7,30 @@ module.exports = async (ctx, next) => {
   const pid = uuid.v1();
   const postParam = {
     pid,
-    time: Math.floor(Date.now() / 1000),
+    cid: null,
+    title: null,
+    note: null,
+    serviceL1: null,
+    serviceL2: null,
+    ableToTransfer: false,
+    zaier_DTG: 0,
+    zaier_JTTZ: 0,
+    zaier_CMTZ: 0,
+    zaier_H: 0,
+    target: null,
+    viewTimes: 0,
+    date: Date.now(),
   };
   
   if (ctx.state.$wxInfo.loginState) {
-      ctx.state.data = ctx.state.$wxInfo.userinfo
-      ctx.state.data['time'] = Math.floor(Date.now() / 1000)
+    postParam.cid = ctx.state.$wxInfo.userinfo
+  } else {
+    ctx.state.data = { code: -1 }
+    return;
   }
 
   // TODO: post
-  await mysql("yysPost").insert(book)
+  await mysql("yysPost").insert(postParam);
+
+  ctx.state.data = { code: 0 }
 }

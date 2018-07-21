@@ -7,30 +7,36 @@ module.exports = async (ctx, next) => {
   const pid = uuid.v1();
   const postParam = {
     pid,
-    cid: null,
-    title: null,
-    note: null,
-    serviceL1: null,
-    serviceL2: null,
+    cid: 'testid_001',
+    title: 'test',
+    note: 'test',
+    serviceL1: 'test',
+    serviceL2: 'test',
     ableToTransfer: false,
     zaier_DTG: 0,
     zaier_JTTZ: 0,
     zaier_CMTZ: 0,
     zaier_H: 0,
-    target: null,
+    target: 'test',
     viewTimes: 0,
-    date: Date.now(),
+    date: Math.floor(Date.now() / 1000),
   };
   
-  if (ctx.state.$wxInfo.loginState) {
-    postParam.cid = ctx.state.$wxInfo.userinfo
-  } else {
-    ctx.state.data = { code: -1 }
-    return;
-  }
+  // if (ctx.state.$wxInfo.loginState) {
+  //   postParam.cid = ctx.state.$wxInfo.userinfo
+  // } else {
+  //   ctx.state.data = { code: -1 }
+  //   return;
+  // }
 
-  // TODO: post
+  console.log('About to post: ', postParam);
+
   await mysql("yysPost").insert(postParam);
 
-  ctx.state.data = { code: 0 }
+  const res = await mysql("yysPost").where({ pid });
+
+  ctx.state.data = { 
+    code: 0,
+    data: res,
+  }
 }

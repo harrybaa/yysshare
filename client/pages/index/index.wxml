@@ -13,9 +13,15 @@
         </view>
     </view>
 
-    <!-- 上传图片测试 -->
+    <view>
+        <view class="list-item" wx:if="{{requestResult}}">
+            <text class="request-text">{{'请求结果：' + requestResult}}</text>
+        </view>
+    </view>
+
+    <!-- 发布帖子跳转 -->
     <view class="uploader">
-        <navigator url="../addCgi/addCgi" open-type="navigate" class="uploader-text">
+        <navigator url="../addPost/addPost" open-type="navigate" class="uploader-text">
             <text>发布帖子</text>
         </navigator>
     </view>

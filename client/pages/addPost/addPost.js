@@ -3,8 +3,6 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 
-
-
 Page({
     data: {
         requestResult: '',
@@ -14,8 +12,8 @@ Page({
         util.showBusy('请求中...')
         var that = this
         qcloud.request({
-            url: `${config.service.host}/weapp/demo`,
-            login: true,
+            url: `${config.service.host}/weapp/onPost`,
+            login: false,
             success (result) {
                 util.showSuccess('发布成功')
                 that.setData({

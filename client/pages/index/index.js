@@ -11,6 +11,10 @@ Page({
         requestResult: ''
     },
 
+    onShow: function () {
+        this.onFetchList();
+    },
+
     // 用户登录示例
     bindGetUserInfo: function () {
         if (this.data.logged) return
@@ -79,5 +83,23 @@ Page({
         } else {    // 使用 wx.request 则不带登录态
             wx.request(options)
         }
+    },
+
+    onFetchList: function () {
+        util.showBusy('请求中...')
+        var that = this
+        qcloud.request({
+            url: `${config.service.host}/weapp/onFetchList`,
+            login: false,
+            success (result) {
+                that.setData({
+                    requestResult: JSON.stringify(result.data)
+                })
+            },
+            fail (error) {
+                util.showModel('请求失败', error);
+                console.log('request fail', error);
+            }
+        })
     },
 })

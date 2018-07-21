@@ -20,7 +20,7 @@ const CONF = {
         host: 'localhost',
         port: 3306,
         user: 'root',
-        db: 'yys',
+        db: 'cAuth',
         pass: 'liuweiba0826',
         char: 'utf8mb4'
     },

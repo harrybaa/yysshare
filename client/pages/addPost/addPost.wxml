@@ -20,4 +20,11 @@
 
     </view>
 
+    <!-- 去发布 -->
+    <view>
+        <view class="list-item" bindtap="onPost">
+            <text>发布帖子</text>
+        </view>
+    </view>
+
 </view>

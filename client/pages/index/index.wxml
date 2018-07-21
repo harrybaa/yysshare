@@ -1,21 +1,28 @@
 <!--index.wxml-->
+
 <view class="container">
     <!-- 用户登录测试 -->
     <view class="userinfo">
-        <image
-            class="userinfo-avatar"
-            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
-            background-size="cover"
-        ></image>
+        <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
         <view>
             <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
             <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
         </view>
     </view>
 
+    <!-- 区服选择 -->
+    <view class="section">
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+            <view class="picker">
+            当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+            </view>
+        </picker>
+    </view>
+
+    <!-- 列表入口 -->
     <view>
-        <view class="list-item" wx:if="{{requestResult}}">
-            <text class="request-text">{{'请求结果：' + requestResult}}</text>
+        <view class="list-item" wx:for="{{listData}}">
+            <template is="listItem" data="{{...item}}" />
         </view>
     </view>
 
@@ -26,3 +33,12 @@
         </navigator>
     </view>
 </view>
+
+<!-- List Item -->
+<template name="listItem">
+    <view>
+        <text> {{serviceL1}}-{{serviceL2}} </text>
+        <text> {{title}} </text>
+        <text> {{viewTimes}} </text>
+    </view>
+</template>

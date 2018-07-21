@@ -2,13 +2,18 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var services = require('../../utils/services')
 
 Page({
     data: {
         userInfo: {},
         logged: false,
         takeSession: false,
-        requestResult: ''
+        listData: [],
+        requestResult: '',
+        services: services.getServiceL1Variable(),
+        selectedSL1: null,
+        selectedSL2: null,
     },
 
     onShow: function () {
@@ -86,15 +91,18 @@ Page({
     },
 
     onFetchList: function () {
-        util.showBusy('请求中...')
         var that = this
         qcloud.request({
             url: `${config.service.host}/weapp/onFetchList`,
             login: false,
             success (result) {
-                that.setData({
-                    requestResult: JSON.stringify(result.data)
-                })
+                console.log('response: ', result.data);
+                if (result.data && result.data.code === 0 && result.data.data) {
+                    that.setData({
+                        listData: result.data.data
+                    })
+                }
+                
             },
             fail (error) {
                 util.showModel('请求失败', error);

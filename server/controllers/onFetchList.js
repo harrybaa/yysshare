@@ -9,8 +9,5 @@ module.exports = async (ctx, next) => {
 
   const res = await mysql("yysPost").where({ serviceL1, serviceL2 });
 
-  ctx.state.data = { 
-    code: 0,
-    res
-  }
+  ctx.state.data = res;
 }

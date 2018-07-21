@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 标题 -->
+    <view>
+
+    </view>
+
+    <!-- 区服 -->
+    <view>
+
+    </view>
+
+    <!-- 数量 -->
+    <view>
+
+    </view>
+
+    <!-- 备注 -->
+    <view>
+
+    </view>
+
+</view>

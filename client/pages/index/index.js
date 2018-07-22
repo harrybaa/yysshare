@@ -90,11 +90,11 @@ Page({
         }
     },
 
-    getServiceL1() {
+    getServiceL1: function () {
       return this.data.serviceSelectArray[0][this.data.serviceSelectIndex[0]];
     },
 
-    getServiceL2() {
+    getServiceL2: function () {
       return this.data.serviceSelectArray[1][this.data.serviceSelectIndex[1]];
     },
 
@@ -146,8 +146,12 @@ Page({
         data.serviceSelectArray[1] = services.getServiceL2List(e.detail.value);
       }
 
-      console.log(data)
-
       this.setData(data);
+    },
+
+    goPostPage: function () {
+        wx.navigateTo({
+            url: `../addPost/addPost?serviceL1Index=${this.data.serviceSelectIndex[0]}&serviceL2Index=${this.data.serviceSelectIndex[1]}`
+        })
     }
 })

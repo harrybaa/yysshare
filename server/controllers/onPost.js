@@ -1,7 +1,6 @@
 // 发布帖子
 const { mysql } = require('../qcloud')
 const uuid = require('node-uuid');
-const _ = require('lodash');
 
 module.exports = async (ctx, next) => {
   const pid = uuid.v1();

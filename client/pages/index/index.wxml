@@ -30,10 +30,8 @@
     </view>
 
     <!-- 发布帖子跳转 -->
-    <view class="uploader">
-        <navigator url="../addPost/addPost" open-type="navigate" class="uploader-text">
-            <text>发布帖子</text>
-        </navigator>
+    <view class="uploader" bindtap='goPostPage'>
+        <text>发布帖子</text>
     </view>
 </view>
 

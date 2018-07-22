@@ -1,23 +1,31 @@
 <!--index.wxml-->
 <view class="container">
-    <!-- 标题 -->
-    <view>
-
-    </view>
-
     <!-- 区服 -->
-    <view>
-
+    <view class="section">
+        <picker mode="multiSelector" bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange" value="{{serviceSelectIndex}}"
+            range="{{serviceSelectArray}}">
+            <view class="picker">
+                区：{{serviceSelectArray[0][serviceSelectIndex[0]]}} / 服：{{serviceSelectArray[1][serviceSelectIndex[1]]}}
+            </view>
+        </picker>
     </view>
+
+    <!-- 标题 -->
+    <view class="section">
+        <input placeholder="标题" bindInput="onChangeTitle" maxlength="24" />
+    </view>
+
 
     <!-- 数量 -->
-    <view>
-
+    <view class="section">
+        <view class="list-item" wx:for="{{zaierArr}}" wx:key="{{index}}">
+            <template is="zaierItem" data="{{...item, key: index}}" />
+        </view>
     </view>
 
     <!-- 备注 -->
-    <view>
-
+    <view class="section">
+        <input placeholder="备注" bindInput="onChangeTitle" maxlength="100" />
     </view>
 
     <!-- 去发布 -->
@@ -28,3 +36,20 @@
     </view>
 
 </view>
+
+<!-- List Item -->
+<template name="zaierItem">
+    <view>
+        <text> {{name}} </text>
+        <image 
+            style="width: 50px; height: 50px; background-color: #eeeeee;"
+            src="{{'../../images/' + id + '.png'}}"
+        />
+        <input maxlength="3"
+            id="{{'qtyInput' + key}}"
+            data-idx="{{key}}"
+            bindinput="onChangeQtyInput" 
+            value="0"
+        />
+    </view>
+</template>

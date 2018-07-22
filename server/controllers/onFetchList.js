@@ -2,12 +2,25 @@
 const { mysql } = require('../qcloud')
 const uuid = require('node-uuid');
 const _ = require('lodash');
+const getQueryUrl = require('../util/getQueryUrl');
 
 module.exports = async (ctx, next) => {
-  const serviceL1 = 'test';
-  const serviceL2 = 'test';
+  const queryUrl = getQueryUrl(ctx.request.url);
 
-  const res = await mysql("yysPost").where({ serviceL1, serviceL2 });
+  let serviceQuery = {};
 
+  if (queryUrl.serviceL1 !== '--') {
+    serviceQuery.serviceL1 = decodeURI(queryUrl.serviceL1);
+  }
+  if (queryUrl.serviceL2 !== '--') {
+    serviceQuery.serviceL2 = decodeURI(queryUrl.serviceL2);
+  }
+
+  let res = await mysql("yysPost").where(serviceQuery);
+
+  ctx.state.data = {
+    res,
+    serviceQuery
+  };
   ctx.state.data = res;
 }

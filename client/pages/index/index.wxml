@@ -12,16 +12,19 @@
 
     <!-- 区服选择 -->
     <view class="section">
-        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <picker mode="multiSelector"
+          bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange"
+          value="{{serviceSelectIndex}}" range="{{serviceSelectArray}}"
+        >
             <view class="picker">
-            当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+              区：{{serviceSelectArray[0][serviceSelectIndex[0]]}} / 服：{{serviceSelectArray[1][serviceSelectIndex[1]]}}
             </view>
         </picker>
     </view>
 
     <!-- 列表入口 -->
     <view>
-        <view class="list-item" wx:for="{{listData}}">
+        <view class="list-item" wx:for="{{listData}}" wx:key="{{index}}">
             <template is="listItem" data="{{...item}}" />
         </view>
     </view>

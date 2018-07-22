@@ -12,8 +12,8 @@ Page({
         listData: [],
         requestResult: '',
         services: services.getServiceL1Variable(),
-        selectedSL1: null,
-        selectedSL2: null,
+        serviceSelectIndex: [0, 0],
+        serviceSelectArray: [services.getServiceL1Name(), services.getServiceL2List(0)],
     },
 
     onShow: function () {
@@ -90,19 +90,32 @@ Page({
         }
     },
 
+    getServiceL1() {
+      return this.data.serviceSelectArray[0][this.data.serviceSelectIndex[0]];
+    },
+
+    getServiceL2() {
+      return this.data.serviceSelectArray[1][this.data.serviceSelectIndex[1]];
+    },
+
     onFetchList: function () {
         var that = this
         qcloud.request({
             url: `${config.service.host}/weapp/onFetchList`,
             login: false,
+            data: {
+              serviceL1: that.getServiceL1(),
+              serviceL2: that.getServiceL2(),
+            },
             success (result) {
                 console.log('response: ', result.data);
                 if (result.data && result.data.code === 0 && result.data.data) {
                     that.setData({
                         listData: result.data.data
                     })
+                } else {
+                    util.showModel('请求结果错误', result);
                 }
-                
             },
             fail (error) {
                 util.showModel('请求失败', error);
@@ -110,4 +123,31 @@ Page({
             }
         })
     },
+
+    // 选择器index改变
+    onServicesPickerChange: function (e) {
+      console.log('Picker value changed: ', e.detail.value);
+      this.setData({ serviceSelectIndex: e.detail.value });
+      this.onFetchList();
+    },
+
+    // 选择器值改变
+    onServicesPickerColumnChange: function (e) {
+      console.log('Picker column changed: ', e.detail.column, 'Picker value changed: ', e.detail.value);
+      const data = {
+        serviceSelectArray: this.data.serviceSelectArray,
+        serviceSelectIndex: this.data.serviceSelectIndex,
+      };
+
+      data.serviceSelectIndex[e.detail.column] = e.detail.value;
+
+      if (e.detail.column === 0) {
+        data.serviceSelectIndex[1] = 0;
+        data.serviceSelectArray[1] = services.getServiceL2List(e.detail.value);
+      }
+
+      console.log(data)
+
+      this.setData(data);
+    }
 })

@@ -122,5 +122,14 @@ Page({
         wx.navigateTo({
             url: `../addPost/addPost?serviceL1Index=${this.data.serviceSelectIndex[0]}&serviceL2Index=${this.data.serviceSelectIndex[1]}&cid=${this.data.userInfo.openId}`
         })
+    },
+
+    goPostIndex: function (e) {
+        const { pid } = e.currentTarget.dataset;
+        
+        console.log('Clicked pid: ', pid);
+        wx.navigateTo({
+            url: `../postIndex/postIndex?pid=${pid}&cid=${this.data.userInfo.openId}`
+        })
     }
 })

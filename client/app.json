@@ -2,7 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/addPost/addPost",
-    "pages/addCgi/addCgi"
+    "pages/postIndex/postIndex"
   ],
   "window":{
     "backgroundColor":"#F6F6F6",

@@ -6,7 +6,7 @@ const uuid = require('node-uuid');
 const getQueryUrl = require('../util/getQueryUrl');
 
 module.exports = async (ctx, next) => {
-  const pid = uuid.v1();
+  const pid = new Date() + '-' + uuid.v1();
   const queryUrl = getQueryUrl(ctx.request.url);
   const {
     cid,

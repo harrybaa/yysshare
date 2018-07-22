@@ -19,6 +19,7 @@ router.get('/user', validationMiddleware, controllers.user)
 // --- 收发帖子 --- //
 router.get('/onPost', controllers.onPost)
 router.get('/onFetchList', controllers.onFetchList)
+router.get('/fetchPost', controllers.fetchPost)
 
 // --- 客服消息接口 Demo --- //
 // GET  用来响应小程序后台配置时发送的验证请求

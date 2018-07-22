@@ -37,7 +37,7 @@
 
 <!-- List Item -->
 <template name="listItem">
-    <view>
+    <view bindtap='goPostIndex' data-pid="{{pid}}">
         <text> {{serviceL1}}-{{serviceL2}} </text>
         <text> {{title}} </text>
         <text> {{viewTimes}} </text>

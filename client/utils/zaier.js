@@ -188,7 +188,7 @@ const zaier = [
 const getZaierObj = () => {
   const result = {};
   zaier.forEach(item => {
-    result[item.name] = item;
+    result[item.id] = item;
   });
   return result;
 }

@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 区服 -->
+    <view class="section">
+        <view class="picker">
+            区：{{postParam.serviceL1}} / 服：{{postParam.serviceL2}}
+        </view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="section">
+        <text> {{postParam.title}} </text>
+    </view>
+
+
+    <!-- 数量 -->
+    <view class="section">
+        <view class="list-item" wx:for="{{zaierObj}}" wx:key="{{index}}">
+            <template is="zaierItem" data="{{...item, key: index}}" />
+        </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="section">
+        <text> {{postParam.note}} </text>
+    </view>
+
+    <!-- 关闭、重新打开 -->
+    <view class="section" wx:if="{{cid === postParam.cid}}">
+        <text>关闭</text>
+    </view>
+
+</view>
+
+<!-- List Item -->
+<template name="zaierItem">
+    <view>
+        <text> {{name}} </text>
+        <image 
+            style="width: 50px; height: 50px;"
+            src="{{'../../images/' + id + '.png'}}"
+        />
+        <text> {{qty}} </text>
+    </view>
+</template>

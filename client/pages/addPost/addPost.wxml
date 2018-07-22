@@ -12,7 +12,7 @@
 
     <!-- 标题 -->
     <view class="section">
-        <input placeholder="标题" bindInput="onChangeTitle" maxlength="24" />
+        <input placeholder="标题" bindinput="onChangeTitle" maxlength="24" />
     </view>
 
 
@@ -25,7 +25,7 @@
 
     <!-- 备注 -->
     <view class="section">
-        <input placeholder="备注" bindInput="onChangeTitle" maxlength="100" />
+        <input placeholder="备注" bindinput="onChangeNote" maxlength="100" />
     </view>
 
     <!-- 去发布 -->

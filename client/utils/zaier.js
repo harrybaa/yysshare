@@ -197,7 +197,12 @@ const getZaierArray = () => {
   return zaier;
 }
 
+const getLength = () => {
+  return zaier.length;
+}
+
 module.exports = {
   getZaierArray,
   getZaierObj,
+  getLength,
 }

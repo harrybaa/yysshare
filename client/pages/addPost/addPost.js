@@ -4,17 +4,17 @@ var config = require('../../config')
 var util = require('../../utils/util.js')
 var zaier = require('../../utils/zaier');
 var services = require('../../utils/services')
-const getQueryUrl = require('../../utils/getQueryUrl');
 
 Page({
     data: {
+        cid: null,
         zaierArr: zaier.getZaierArray(),
+        zaierQty: new Array(zaier.getLength()).fill(0),
         services: services.getServiceL1Variable(),
         serviceSelectIndex: [0, 0],
         serviceSelectArray: [services.getServiceL1Name(), services.getServiceL2List(0)],
         title: '',
         note: '',
-        zaierQty: new Array(23).fill(0),
         ableToTransfer: false,
     },
 
@@ -25,10 +25,11 @@ Page({
             parseInt(option.serviceL2Index || 0)
         ];
         console.log('Query: ', serviceSelectIndex);
-        serviceSelectArray[1] = services.getServiceL2List(serviceSelectIndex[1]);
+        serviceSelectArray[1] = services.getServiceL2List(serviceSelectIndex[0]);
         this.setData({ 
             serviceSelectIndex,
-            serviceSelectArray
+            serviceSelectArray,
+            cid: option.cid,
         });
     },
 
@@ -46,7 +47,6 @@ Page({
         this.setData({
             serviceSelectIndex: e.detail.value
         });
-        this.onFetchList();
     },
 
     // 选择器值改变
@@ -69,6 +69,12 @@ Page({
 
     onChangeTitle: function(e) {
         console.log('title: ', e.detail.value);
+        this.setData({ title: e.detail.value });
+    },
+
+    onChangeNote: function(e) {
+        console.log('note: ', e.detail.value);
+        this.setData({ note: e.detail.value });
     },
 
     onChangeQtyInput: function(e) {
@@ -88,31 +94,74 @@ Page({
         return zaierQty[idx].toString();
     },
 
+    toZaierQtyObj: function(qtyArr) {
+        const qtyObj = {};
+        const { zaierArr } = this.data;
+
+        qtyArr.forEach((ele, idx) => {
+            const name = 'zaier_' + zaierArr[idx].id;
+            qtyObj[name] = ele;
+        })
+
+        console.log('Converted zaierQty: ', qtyObj);
+        return qtyObj;
+    },
+
+    validParam: function(param) {
+        if (param.serviceL1 === '--' || param.serviceL2 === '--') {
+            wx.showToast({ title: '请选择区服' });
+            return false;
+        }
+
+        if (!param.title) {
+            wx.showToast({ title: '取个标题吧' });
+            return false;
+        }
+
+        if (!param.cid) {
+            wx.showToast({ title: '登陆信息丢失' });
+            return false;
+        }
+
+        return true;
+    },
+
     onPost: function () {
         util.showBusy('请求中...');
         var that = this
         const {
-            serviceL1,
-            serviceL2,
+            cid,
             title,
             note,
             zaierQty,
             ableToTransfer
         } = this.data;
         const postParam = {
-            serviceL1,
-            serviceL2,
-            title,
-            note,
-            ableToTransfer,
-            ...zaierQty,
+            cid,
+            serviceL1: this.getServiceL1(),
+            serviceL2: this.getServiceL2(),
+            title: title.replace(/(^\s*)|(\s*$)/g, ''),
+            note: note.replace(/(^\s*)|(\s*$)/g, ''),
+            ableToTransfer: ableToTransfer ? 1 : 0,
         };
 
+        const zaierQtyObj = this.toZaierQtyObj(zaierQty);
+        for (const name in zaierQtyObj) {
+            if (zaierQtyObj[name]) {
+                postParam[name] = zaierQtyObj[name];
+            }
+        }
+
+        if (!this.validParam(postParam)) {
+            return;
+        }
+
+        console.log('Request param: ', postParam);
         qcloud.request({
             url: `${config.service.host}/weapp/onPost`,
-            login: false,
+            login: true,
             data: {
-                postParam
+                ...postParam
             },
             success(result) {
                 util.showSuccess('发布成功')

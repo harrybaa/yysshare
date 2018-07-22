@@ -1,41 +1,84 @@
 // 发布帖子
-const { mysql } = require('../qcloud')
+const {
+  mysql
+} = require('../qcloud')
 const uuid = require('node-uuid');
+const getQueryUrl = require('../util/getQueryUrl');
 
 module.exports = async (ctx, next) => {
   const pid = uuid.v1();
+  const queryUrl = getQueryUrl(ctx.request.url);
+  const {
+    cid,
+    title,
+    note,
+    serviceL1,
+    serviceL2,
+    ableToTransfer
+  } = queryUrl;
+  const {
+    zaier_DTG,
+    zaier_JTTZ,
+    zaier_CMTZ,
+    zaier_H,
+    zaier_BAH,
+    zaier_GD,
+    zaier_HCZZ,
+    zaier_HNJ,
+    zaier_HYJ,
+    zaier_MLQ,
+    zaier_MYL,
+    zaier_NLLS,
+    zaier_QXD,
+    zaier_QYC,
+    zaier_SF,
+    zaier_SSW,
+    zaier_XLN,
+    zaier_XTZ,
+    zaier_YDJ,
+    zaier_YM,
+    zaier_YML,
+    zaier_YZJ,
+    zaier_YZQ,
+  } = queryUrl;
+
   const postParam = {
     pid,
-    cid: 'testid_001',
-    title: 'test',
-    note: 'test',
-    serviceL1: 'test',
-    serviceL2: 'test',
-    ableToTransfer: false,
-    zaier_DTG: 0,
-    zaier_JTTZ: 0,
-    zaier_CMTZ: 0,
-    zaier_H: 0,
+    cid,
+    title,
+    note,
+    serviceL1,
+    serviceL2,
+    ableToTransfer,
+    zaier_DTG,
+    zaier_JTTZ,
+    zaier_CMTZ,
+    zaier_H,
+    zaier_BAH,
+    zaier_GD,
+    zaier_HCZZ,
+    zaier_HNJ,
+    zaier_HYJ,
+    zaier_MLQ,
+    zaier_MYL,
+    zaier_NLLS,
+    zaier_QXD,
+    zaier_QYC,
+    zaier_SF,
+    zaier_SSW,
+    zaier_XLN,
+    zaier_XTZ,
+    zaier_YDJ,
+    zaier_YM,
+    zaier_YML,
+    zaier_YZJ,
+    zaier_YZQ,
     target: 'test',
     viewTimes: 0,
     date: Math.floor(Date.now() / 1000),
   };
-  
-  // if (ctx.state.$wxInfo.loginState) {
-  //   postParam.cid = ctx.state.$wxInfo.userinfo
-  // } else {
-  //   ctx.state.data = { code: -1 }
-  //   return;
-  // }
-
-  console.log('About to post: ', postParam);
 
   await mysql("yysPost").insert(postParam);
 
-  const res = await mysql("yysPost").where({ pid });
-
-  ctx.state.data = { 
-    code: 0,
-    data: res,
-  }
+  ctx.state.data = { pid };
 }

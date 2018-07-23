@@ -19,6 +19,7 @@ router.get('/user', validationMiddleware, controllers.user)
 // --- 收发帖子 --- //
 router.get('/onPost', controllers.onPost)
 router.get('/onFetchList', controllers.onFetchList)
+router.get('/onFetchMyPosts', controllers.onFetchMyPosts)
 router.get('/fetchPost', controllers.fetchPost)
 
 // --- 客服消息接口 Demo --- //

@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/addPost/addPost",
+    "pages/myPostList/myPostList",
     "pages/postIndex/postIndex"
   ],
   "window":{

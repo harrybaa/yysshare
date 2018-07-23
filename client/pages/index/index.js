@@ -131,5 +131,18 @@ Page({
         wx.navigateTo({
             url: `../postIndex/postIndex?pid=${pid}&cid=${this.data.userInfo.openId}`
         })
-    }
+    },
+
+    goMyPosts: function () {
+        const cid = this.data.userInfo.openId;
+
+        if (!cid) {
+            wx.showToast({title: '登陆信息丢失'});
+            return;
+        }
+        
+        wx.navigateTo({
+            url: `../myPostList/myPostList?cid=${cid}`
+        })
+    },
 })

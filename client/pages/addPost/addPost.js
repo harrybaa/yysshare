@@ -168,11 +168,18 @@ Page({
                 that.setData({
                     requestResult: JSON.stringify(result.data)
                 })
+                that.goPostIndex(result.data.data.pid)
             },
             fail(error) {
                 util.showModel('请求失败', error);
                 console.log('request fail', error);
             }
+        })
+    },
+
+    goPostIndex: function (pid) {
+        wx.redirectTo({
+            url: `../postIndex/postIndex?pid=${pid}&cid=${this.data.cid}`
         })
     },
 })

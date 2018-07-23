@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 头 -->
+    <view class="section">
+        <view>我是背景图片</view>
+    </view>
+
+    <!-- 数量 -->
+    <view class="section">
+        <view class="list-item" wx:for="{{listData}}" wx:key="{{index}}">
+            <template is="myPostItem" data="{{...item, key: index}}" />
+        </view>
+    </view>
+
+    <!-- 打赏 -->
+    <!-- <view class="section" wx:if="{{cid === postParam.cid}}">
+        <text>打赏一下吧</text>
+    </view> -->
+</view>
+
+<!-- List Item -->
+<template name="myPostItem">
+    <view>
+        <view>
+            区：{{serviceL1}} / 服：{{serviceL2}}
+        </view>
+        <view>
+            {{target}}
+        </view>
+        <view>
+            <text> {{title}} </text>
+            <text> {{viewTimes}} </text>
+        </view>
+    </view>
+</template>

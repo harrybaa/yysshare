@@ -2,11 +2,10 @@
 
 <view class="container">
     <!-- 用户登录测试 -->
-    <view class="userinfo">
+    <view class="userinfo" bindtap="goMyPosts">
         <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
         <view>
-            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
-            <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
+            <text>我的</text>
         </view>
     </view>
 

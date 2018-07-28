@@ -1,10 +1,15 @@
 <!--index.wxml-->
 
 <view class="container">
+
+    <view class="headWrapper">
+        <image class="coverImage" src="../../images/indexHeader.png" mode="widthFix"></image>
+    </view>
+
     <!-- 用户登录测试 -->
     <view class="userinfo" bindtap="goMyPosts">
         <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
-        <view>
+        <view class="userinfo-nickname">
             <text>我的</text>
         </view>
     </view>

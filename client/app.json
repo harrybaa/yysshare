@@ -6,10 +6,10 @@
     "pages/postIndex/postIndex"
   ],
   "window":{
-    "backgroundColor":"#F6F6F6",
+    "backgroundColor":"#232220",
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#232220",
+    "navigationBarTitleText": "阴阳师碎片互助平台",
+    "navigationBarTextStyle":"white"
   }
 }

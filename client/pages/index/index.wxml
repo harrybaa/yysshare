@@ -43,7 +43,12 @@
 
     <!-- footer -->
     <view class="headWrapper">
-        <image class="coverImage" src="../../images/bottom.jpg" mode="widthFix"></image>
+        <image class="coverImage" src="../../images/indexFooter.png" mode="widthFix"></image>
+        <view class="footer-info">
+            <text class="footer-info-version">Beta 1.0</text>
+            <view></view>
+            <text class="footer-info-note">如有侵权，请联系删除。</text>
+        </view>
     </view>
 </view>
 

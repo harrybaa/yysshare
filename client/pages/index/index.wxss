@@ -71,9 +71,7 @@
 .list-item {
     width: 100%;
     height: 100rpx;
-    padding: 0 40rpx;
     margin-top: 60rpx;
-    margin-left: 20rpx;
 }
 
 .list-item-wrapper {
@@ -165,4 +163,30 @@
     font-size: 52rpx;
     box-shadow: #332615 2rpx 6rpx 20rpx;
     text-align: center;
+}
+
+/** footer **/
+.footer-info {
+    margin-top: -150rpx;
+    height: 0;
+    text-align: center;
+}
+
+.footer-info-version {
+    padding: 1rpx 15rpx;
+    height: 0;
+    width: 120rpx;
+    height: 40rpx;
+    background: #b4ccc4;
+    box-shadow: #b4ccc4 2rpx 6rpx 20rpx;
+    border-radius: 10rpx;
+    font-size: 24rpx;
+    color: #666;
+}
+
+.footer-info-note {
+    margin-top: 100rpx;
+    padding: 0 80rpx;
+    font-size: 24rpx;
+    color: #e8f3eb;
 }

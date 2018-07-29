@@ -10,18 +10,19 @@
     <view class="userinfo" bindtap="goMyPosts">
         <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
         <view class="userinfo-nickname">
-            <text>我的</text>
+            <text>我的列表</text>
         </view>
     </view>
 
     <!-- 区服选择 -->
-    <view class="section">
-        <picker mode="multiSelector"
-          bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange"
-          value="{{serviceSelectIndex}}" range="{{serviceSelectArray}}"
-        >
-            <view class="picker">
-              区：{{serviceSelectArray[0][serviceSelectIndex[0]]}} / 服：{{serviceSelectArray[1][serviceSelectIndex[1]]}}
+    <view class="picker-section">
+        <picker mode="multiSelector" bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange" value="{{serviceSelectIndex}}"
+            range="{{serviceSelectArray}}">
+            <view class="server-picker">
+                <view class="server-picker-name">区</view>
+                <view class="server-picker-item">{{serviceSelectArray[0][serviceSelectIndex[0]]}}</view>
+                <view class="server-picker-name">服</view>
+                <view class="server-picker-item">{{serviceSelectArray[1][serviceSelectIndex[1]]}}</view>
             </view>
         </picker>
     </view>
@@ -34,16 +35,35 @@
     </view>
 
     <!-- 发布帖子跳转 -->
-    <view class="uploader" bindtap='goPostPage'>
-        <text>发布帖子</text>
+    <view class="onpost-wrapper">
+        <view class="onpost-wrapper-button" bindtap='goPostPage'>
+            <text>发布帖子</text>
+        </view>
+    </view>
+
+    <!-- footer -->
+    <view class="headWrapper">
+        <image class="coverImage" src="../../images/bottom.jpg" mode="widthFix"></image>
     </view>
 </view>
 
 <!-- List Item -->
 <template name="listItem">
-    <view bindtap='goPostIndex' data-pid="{{pid}}">
-        <text> {{serviceL1}}-{{serviceL2}} </text>
-        <text> {{title}} </text>
-        <text> {{viewTimes}} </text>
+    <view class="list-item-wrapper" bindtap='goPostIndex' data-pid="{{pid}}">
+        <view class="zaier-profile">
+            <image class="zaier-profile-image" src="{{'../../images/profile/' + target + '.png'}}" mode="widthFix"></image>
+        </view>
+        <view class="list-item-info">
+            <view class="list-item-service">
+                <view class="list-item-s1">{{serviceL1}}</view>
+                <view class="list-item-s2">{{serviceL2}}</view>
+            </view>
+            <view class="list-item-title">
+                <text> {{title}} </text>
+            </view>
+        </view>
+        <view class="view-times-wrapper">
+            <text> {{viewTimes}} </text>
+        </view>
     </view>
 </template>

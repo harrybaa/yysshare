@@ -4,6 +4,7 @@ var config = require('../../config')
 var util = require('../../utils/util.js')
 var services = require('../../utils/services')
 var aboutLogin = require('../../utils/aboutLogin');
+var zaier = require('../../utils/zaier');
 
 Page({
     data: {
@@ -67,6 +68,16 @@ Page({
       return this.data.serviceSelectArray[1][this.data.serviceSelectIndex[1]];
     },
 
+    convertData: function (data) {
+        const zaierObj = zaier.getZaierObj;
+        return data.map((item) => {
+            return {
+                ...item,
+                target: zaierObj.hasOwnProperty(item.target) ? item.target : 'TS'
+            }
+        })
+    },
+
     onFetchList: function () {
         var that = this
         qcloud.request({
@@ -79,9 +90,8 @@ Page({
             success (result) {
                 console.log('response: ', result.data);
                 if (result.data && result.data.code === 0 && result.data.data) {
-                    that.setData({
-                        listData: result.data.data
-                    })
+                    const listData = that.convertData(result.data.data);
+                    that.setData({ listData })
                 } else {
                     util.showModel('请求结果错误', result);
                 }

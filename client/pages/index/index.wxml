@@ -19,9 +19,10 @@
         <picker mode="multiSelector" bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange" value="{{serviceSelectIndex}}"
             range="{{serviceSelectArray}}">
             <view class="server-picker">
-                <view class="server-picker-name">区</view>
+                <view class="server-picker-name">区:</view>
                 <view class="server-picker-item">{{serviceSelectArray[0][serviceSelectIndex[0]]}}</view>
-                <view class="server-picker-name">服</view>
+                <view class="server-picker-seperator"></view>
+                <view class="server-picker-name">服:</view>
                 <view class="server-picker-item">{{serviceSelectArray[1][serviceSelectIndex[1]]}}</view>
             </view>
         </picker>
@@ -29,8 +30,16 @@
 
     <!-- 列表入口 -->
     <view>
-        <view class="list-item" wx:for="{{listData}}" wx:key="{{index}}">
-            <template is="listItem" data="{{...item}}" />
+        <view wx:if="{{listData.length}}">
+                <view class="list-item" wx:for="{{listData}}" wx:key="{{index}}">
+                        <template is="listItem" data="{{...item}}" />
+                    </view>
+        </view>
+        <view wx:else>
+            <view class="list-empty-wrapper">
+                <view>京都空荡荡</view>
+                <view>快来成为一个召集人吧</view>
+            </view>
         </view>
     </view>
 

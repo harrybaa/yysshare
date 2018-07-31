@@ -142,8 +142,12 @@
 }
 
 .list-item-title {
+    width: 380rpx;
     font-size: 36rpx;
     margin-top: 10rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
 }
 
 .view-times-wrapper {

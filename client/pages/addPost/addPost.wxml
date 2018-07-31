@@ -1,38 +1,59 @@
 <!--index.wxml-->
 <view class="container">
+
+    <!-- Header -->
+    <view class="headWrapper">
+        <image class="coverImage" src="../../images/onpostHeader.png" mode="widthFix"></image>
+        <image class="coverImage" src="../../images/onpostTitle.png" mode="widthFix"></image>
+    </view>
+
+
     <!-- 区服 -->
-    <view class="section">
+    <view class="picker-section">
         <picker mode="multiSelector" bindchange="onServicesPickerChange" bindcolumnchange="onServicesPickerColumnChange" value="{{serviceSelectIndex}}"
             range="{{serviceSelectArray}}">
-            <view class="picker">
-                区：{{serviceSelectArray[0][serviceSelectIndex[0]]}} / 服：{{serviceSelectArray[1][serviceSelectIndex[1]]}}
+            <view class="server-picker">
+                    <view class="server-picker-name">区:</view>
+                    <view class="server-picker-item">{{serviceSelectArray[0][serviceSelectIndex[0]]}}</view>
+                    <view class="server-picker-name">服:</view>
+                    <view class="server-picker-item">{{serviceSelectArray[1][serviceSelectIndex[1]]}}</view>
             </view>
         </picker>
     </view>
 
+    <!-- ID -->
+    <view class="title-section">
+        <input placeholder="昵称/ID" class="title-input" bindinput="" maxlength="24" />
+    </view>
+
     <!-- 标题 -->
-    <view class="section">
-        <input placeholder="标题" bindinput="onChangeTitle" maxlength="24" />
+    <view class="title-section">
+        <input placeholder="标题" class="title-input" bindinput="onChangeTitle" maxlength="24" />
     </view>
 
 
     <!-- 数量 -->
-    <view class="section">
+    <view class="list-section">
         <view class="list-item" wx:for="{{zaierArr}}" wx:key="{{index}}">
             <template is="zaierItem" data="{{...item, key: index}}" />
         </view>
     </view>
 
     <!-- 备注 -->
-    <view class="section">
-        <input placeholder="备注" bindinput="onChangeNote" maxlength="100" />
+    <view class="note-section">
+        <input class="note-input" placeholder="备注" bindinput="onChangeNote" maxlength="100" />
     </view>
 
     <!-- 去发布 -->
-    <view>
-        <view class="list-item" bindtap="onPost">
+    <view class="onpost-wrapper">
+        <view class="onpost-wrapper-button" bindtap="onPost">
             <text>发布帖子</text>
         </view>
+    </view>
+
+    <!-- footer -->
+    <view class="headWrapper">
+        <image class="coverImage" src="../../images/indexFooter.png" mode="widthFix"></image>
     </view>
 
 </view>
@@ -40,16 +61,8 @@
 <!-- List Item -->
 <template name="zaierItem">
     <view>
-        <text> {{name}} </text>
-        <image 
-            style="width: 50px; height: 50px; background-color: #eeeeee;"
-            src="{{'../../images/' + id + '.png'}}"
-        />
-        <input maxlength="3"
-            id="{{'qtyInput' + key}}"
-            data-idx="{{key}}"
-            bindinput="onChangeQtyInput" 
-            value="0"
-        />
+        <image class="list-item-image" src="{{'../../images/head/' + id + '.png'}}" />
+        <view class="list-item-name"><text> {{name}} </text></view>
+        <input class="list-item-input" maxlength="3" id="{{'qtyInput' + key}}" data-idx="{{key}}" bindinput="onChangeQtyInput" value="0" />
     </view>
 </template>

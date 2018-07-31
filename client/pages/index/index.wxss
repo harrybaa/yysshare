@@ -19,7 +19,7 @@
 
 /**users**/
 .userinfo {
-    position: fixed;
+    position: absolute;
     width: 100rpx;
     top: 30rpx;
     right: 20rpx;
